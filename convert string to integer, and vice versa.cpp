@@ -9,20 +9,18 @@
 #include <stdexcept>
 #include <string>
 
-using std::cout;
+
 using std::default_random_engine;
-using std::endl;
-using std::exception;
-using std::invalid_argument;
-using std::max;
+
+
 using std::numeric_limits;
 using std::random_device;
-using std::string;
+
 using std::uniform_int_distribution;
 
-string RandIntString(int len) {
+std::string RandIntString(int len) {
   default_random_engine gen((random_device())());
-  string ret;
+  std::string ret;
   if (len == 0) {
     return {"0"};
   }
@@ -40,57 +38,31 @@ string RandIntString(int len) {
 }
 
 // @include
-string IntToString(int x) {
-  bool is_negative = false;
-  if (x < 0) {
-    x = -x, is_negative = true;
-  }
+std::string IntToString(int x) {
 
-  string s;
-  while (x) {
-    s.push_back('0' + x % 10);
-    x /= 10;
-  }
-  if (s.empty()) {
-    return {"0"};  // x is 0.
-  }
-
-  if (is_negative) {
-    s.push_back('-');  // Adds the negative sign back.
-  }
-  reverse(s.begin(), s.end());
-  return s;
 }
 
-int StringToInt(const string& s) {
-  bool is_negative = s[0] == '-';
-  int r = 0;
-  for (int i = s[0] == '-' ? 1 : 0; i < s.size(); ++i) {
-    int digit = s[i] - '0';
-    r = r * 10 + digit;
-  }
-  return is_negative ? -r : r;
+int StringToInt(const std::string& s) {
+
 }
 // @exclude
 
 int main(int argc, char* argv[]) {
   default_random_engine gen((random_device())());
-  if (argc == 2) {
-    cout << StringToInt(argv[1]) << endl;
-  } else {
-    for (int times = 0; times < 10000; ++times) {
+
+    for (int times = 0; times < 3; ++times) {
       uniform_int_distribution<int> dis(numeric_limits<int>::min(),
                                         numeric_limits<int>::max());
       int x = dis(gen);
-      string str = IntToString(x);
-      cout << x << " " << str << endl;
-      assert(x == stoi(str));
+      std::string str = IntToString(x);
+      std::cout << x << " " << str << std::endl;
+      assert(x == std::stoi(str));
       uniform_int_distribution<int> len_dis(0, 9);
       str = RandIntString(len_dis(gen));
       x = StringToInt(str);
-      cout << str << " " << x << endl;
-      assert(x == stoi(str));
+      std::cout << str << " " << x << std::endl;
+      assert(x == std::stoi(str));
     }
-  }
+  
   return 0;
 }
