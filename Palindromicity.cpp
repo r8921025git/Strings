@@ -4,6 +4,7 @@
 #include <cctype>
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using std::cout;
 using std::endl;
@@ -11,7 +12,10 @@ using std::string;
 
 // @include
 bool IsPalindrome(const string& s) {
-
+    string rs = s;
+    std::reverse(rs.begin(),rs.end());
+    cout<<"s="<<s<<endl;
+    cout<<"rs = "<<rs<<endl;
   return true;
 }
 // @exclude
