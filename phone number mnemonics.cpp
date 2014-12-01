@@ -24,8 +24,27 @@ const vector<string> M = {{"0", "1", "ABC", "DEF", "GHI",
                                          "JKL", "MNO", "PQRS", "TUV",
                                          "WXYZ"}};
 
-vector<string> PhoneMnemonic(const string& phone_number) {
-
+vector<string> PhoneMnemonic_iterative(const string& phone_number) {
+    vector<string> output;
+    for (int i=0; i<phone_number.size(); ++i) {
+        int digit = phone_number[i]-'0';
+        string letters = M[digit].c_str();
+        
+        vector<string> new_output;
+        if (output.size()==0) {
+            for (int k=0; k<letters.size(); ++k) {
+                string tmp = std::string(letters[k]);
+                output.push_back(tmp);
+            }
+        }
+        else {
+            for (auto res : output) {
+            
+            }
+        }
+        
+    }
+    return output;
 }
 
 string RandString(int len) {
@@ -45,7 +64,7 @@ int main(int argc, char *argv[]) {
   } else {
     num = RandString(2);
   }
-  auto result = PhoneMnemonic(num);
+  auto result = PhoneMnemonic_iterative(num);
   cout << "number = " << num << endl;
   for (const auto& str : result) {
     cout << str << endl;
