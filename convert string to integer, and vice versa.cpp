@@ -68,7 +68,17 @@ std::string IntToString(int x) {
 }
 
 int StringToInt(const std::string& s) {
-
+    bool bIsNeg = false;
+    if (s[0] == '-') {
+        bIsNeg = true;
+    }
+    for (int i=0; i<(int)s.size(); ++i) {
+        if (bIsNeg) {
+            
+        }
+        int t = s[i] - '0';
+        printf("t=%d\n", t);
+    }
 }
 // @exclude
 
@@ -87,6 +97,7 @@ int main(int argc, char* argv[]) {
       printf("\n\n  Preparing for string-to-int\n\n");
       uniform_int_distribution<int> len_dis(0, 9);
       str = RandIntString(len_dis(gen));
+      std::cout<<"input str = "<<str<<std::endl;
       x = StringToInt(str);
       std::cout << str << " " << x << std::endl;
       assert(x == std::stoi(str));
