@@ -39,7 +39,32 @@ std::string RandIntString(int len) {
 
 // @include
 std::string IntToString(int x) {
-
+    const int ori_x = x;
+    int m = 10;
+    std::vector<char> vec_char;
+    bool bIsNegative = false;
+    if (x<0) {
+        bIsNegative = true;
+        x = x*(-1);
+    }
+    while (1) {
+        int s = x % m;
+        x = int(x / m);
+        vec_char.push_back(s);
+        if (x==0) {
+            break;
+        }
+    }
+    std::reverse(vec_char.begin(),vec_char.end());
+    std::string output = "";
+    if (bIsNegative)
+        output += '-';
+        
+    for (char c : vec_char) {
+        printf("c=%d\n",c);
+        output += '0' + c;
+    }
+    return output;
 }
 
 int StringToInt(const std::string& s) {
@@ -54,9 +79,12 @@ int main(int argc, char* argv[]) {
       uniform_int_distribution<int> dis(numeric_limits<int>::min(),
                                         numeric_limits<int>::max());
       int x = dis(gen);
+      printf("intput x = %d\n", x);
       std::string str = IntToString(x);
       std::cout << x << " " << str << std::endl;
       assert(x == std::stoi(str));
+      
+      printf("\n\n  Preparing for string-to-int\n\n");
       uniform_int_distribution<int> len_dis(0, 9);
       str = RandIntString(len_dis(gen));
       x = StringToInt(str);
