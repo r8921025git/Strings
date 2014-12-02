@@ -72,13 +72,20 @@ int StringToInt(const std::string& s) {
     if (s[0] == '-') {
         bIsNeg = true;
     }
-    for (int i=0; i<(int)s.size(); ++i) {
-        if (bIsNeg) {
-            
-        }
+    int start_i = 0;
+    if (bIsNeg)
+        start_i = 1;
+        
+    int output = 0;
+    for (int i=start_i; i<(int)s.size(); ++i) {
+        
         int t = s[i] - '0';
         printf("t=%d\n", t);
+        output = output*10+t;
     }
+    if (bIsNeg)
+        output*=-1;
+    return output;
 }
 // @exclude
 
